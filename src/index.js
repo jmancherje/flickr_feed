@@ -1,13 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
-
-class App extends Component {
-  render() {
-    return (
-      <h4>Hello</h4>
-    )
-  }
-}
+import App from './components/App'
 
 ReactDOM.render(
   <App />,
