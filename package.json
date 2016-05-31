@@ -34,10 +34,12 @@
     ]
   },
   "dependencies": {
+    "axios": "^0.11.1",
     "body-parser": "^1.15.1",
     "cors": "^2.7.1",
     "express": "^4.13.4",
     "immutable": "^3.8.1",
+    "jsonp": "^0.2.0",
     "morgan": "^1.7.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
@@ -45,6 +47,7 @@
     "react-router": "^2.4.1",
     "react-router-redux": "^4.0.4",
     "redux": "^3.5.2",
+    "redux-promise": "^0.5.3",
     "request": "^2.72.0"
   }
 }
