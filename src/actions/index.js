@@ -19,3 +19,24 @@ export function updateFeed() {
     payload: request
   }
 }
+
+export function changeFeedPage(newPage) {
+  return {
+    type: 'CHANGE_FEED_PAGE',
+    newPage
+  }
+}
+
+export function changeFavoritesPage(newPage) {
+  return {
+    type: 'CHANGE_FAVORITES_PAGE',
+    newPage
+  }
+}
+
+export function changeView(newView) {
+  return {
+    type: 'CHANGE_VIEW',
+    newView
+  }
+}
