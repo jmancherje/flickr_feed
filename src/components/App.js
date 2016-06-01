@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import ListView from './ListView'
 import { Link } from 'react-router'
 import { updateFeed } from '../actions'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 class App extends Component {
   constructor(props) {
@@ -21,13 +22,12 @@ class App extends Component {
     const self = this
     this.props.updateFeed()
       .then(() => {
-        self.toggleAlert()
-        window.setTimeout(self.toggleAlert.bind(this), 10000)
+        // self.toggleAlert()
+        // window.setTimeout(self.toggleAlert.bind(this), 3000)
       })
   }
 
   toggleAlert() {
-    console.log('open close..')
     this.setState({ showAlert: !this.state.showAlert })
   }
 
@@ -40,9 +40,16 @@ class App extends Component {
       <div>
         <Link to="/feed">feed</Link>
         <Link to="/favorites">favorites</Link>
-        <div className={`alert alert-info ${this.state.showAlert ? '' : 'hidden-xs-up'}`} role="alert">
-          <strong>Awesome!</strong> New images in your feed. Check the last page or reverse the order to see what's new!
-        </div>
+        <ReactCSSTransitionGroup transitionAppearTimeout={500} transitionEnterTimeout={500} transitionAppear={true} transitionLeaveTimeout={500} transitionName={ {
+              enter: 'enter',
+              enterActive: 'enter-active',
+              leave: 'leave',
+              leaveActive: 'leave-active'
+            } }>
+          {!this.state.showAlert ? null : <div key={0} className="alert alert-info hover" role="alert">
+            <strong>Awesome!</strong> New images in your feed. Check the last page or reverse the order to see what's new!
+          </div>}
+        </ReactCSSTransitionGroup>
         {this.props.children}
       </div>
     )
