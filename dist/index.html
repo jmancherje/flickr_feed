@@ -3,9 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <title>Flickr</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+  <style>
+    
+    .hover {
+      position: fixed;
+      top: 50px;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+    }
+
+    .enter {
+      opacity: 0.01;
+    }
+
+    .enter.enter-active {
+      opacity: 1;
+      transition: opacity 500ms ease-in;
+    }
+
+/*    .leave {
+      opacity: 1;
+    }
+
+    .leave.leave-active {
+      opacity: 0.01;
+      transition: opacity 100ms ease-in;
+    }*/
+
+  </style>
 </head>
 <body>
-  <div id="main"></div>
+  <div id="main" class="container-fluid col-xl-10 col-xl-offset-1"></div>
   <script src="bundle.js"></script>
 </body>
 </html>
