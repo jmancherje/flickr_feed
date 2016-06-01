@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import dummyData from '../dummy_data'
 import { updateFeed } from '../actions'
-import jsonp from 'jsonp'
+import Pagination from './Pagination'
 
 class ListView extends Component {
   componentWillMount() {
@@ -10,25 +9,30 @@ class ListView extends Component {
   }
 
   renderImages() {
-    return this.props.images.map((item, index) => 
-      <img key={index} src={item.media.m} height="150px" />
-    )
+    const page = this.props.pageNumber
+    return !this.props.images[page - 1] ? null :
+      this.props.images[page - 1].map((item, index) => 
+        <img key={index} src={item.media.m} height="150px" />
+      )
   }
 
   render() {
     return (
       <div>
-        <button onClick={this.props.updateFeed}>add more</button>
-        <h4>{this.props.route.view}</h4>
+        <button onClick={this.props.updateFeed}>Fetch More</button>
+        <Pagination numberOfPages={this.props.images.length} />
         {this.renderImages.call(this)}
+        <Pagination numberOfPages={this.props.images.length} />
       </div>
     )
   }
 }
 
 function mapStateToProps(state) {
+  console.log(state.ui.feedPage)
   return {
-    images: state.images
+    images: state.images,
+    pageNumber: state.ui.feedPage
   }
 }
 

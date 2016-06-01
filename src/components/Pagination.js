@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { changeFeedPage } from '../actions'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 class Pagination extends Component {
   
   linkClassName(pageNumber) {
-    console.log(this.props.feedPage, pageNumber)
     return this.props.feedPage === pageNumber ? 
       "page-item active" :
       "page-item"
@@ -14,7 +14,20 @@ class Pagination extends Component {
   pageList() {
     const pages = []
     const self = this
-    for (let i = 1; i <= this.props.numberOfPages; i++) {
+    let start = 1, 
+        end = this.props.numberOfPages
+
+    if (this.props.numberOfPages > 6) {
+      if (this.props.feedPage > 3 && this.props.feedPage < this.props.numberOfPages - 3) {
+        start = this.props.feedPage - 3
+        end = this.props.feedPage + 3
+      } else if (this.props.feedPage <= 3) {
+        end = 7
+      } else if (this.props.feedPage >= this.props.numberOfPages - 3) {
+        start = this.props.numberOfPages - 6
+      }
+    }
+    for (let i = start; i <= end; i++) {
       pages.push(
         <li className={this.linkClassName.call(this, i)} key={i}>
           <a className="page-link"
@@ -34,7 +47,13 @@ class Pagination extends Component {
     return (
       <nav>
         <ul className="pagination">
-          {this.pageList.call(this)}
+          <ReactCSSTransitionGroup transitionAppearTimeout={500} transitionEnterTimeout={500} transitionAppear={true} transitionLeaveTimeout={500} transitionName={ {
+              enter: 'enter',
+              enterActive: 'enter-active',
+              leave: 'leave',
+              leaveActive: 'leave-active'} }>
+            {this.pageList.call(this)}
+          </ReactCSSTransitionGroup>
         </ul>
       </nav>
     )
