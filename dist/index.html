@@ -5,6 +5,20 @@
   <title>Flickr</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
   <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      margin-bottom: 20px;
+    }
+
+    .active-link {
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
     .hover {
       position: fixed;
       top: 50px;
@@ -26,6 +40,7 @@
       display: inline-block;
       margin-right: 20px;
       cursor: pointer;
+      border-radius: 15px;
     }
 
     img.portrait {
@@ -39,22 +54,6 @@
     .image-card:hover {
       box-shadow: 0 0 15px #7DBDE8;
     }
-
-/*    @media (max-width: 600px)  {
-      .image-card {
-        width: 200px;
-        height: 150px;
-        overflow: hidden;
-      }
-    }
-
-    @media (max-width: 600px)  {
-      .image-card {
-        width: 200px;
-        height: 150px;
-        overflow: hidden;
-      }
-    }*/
 
     @media only screen 
     and (max-width : 350px) {
@@ -139,7 +138,7 @@
   </style>
 </head>
 <body>
-  <div id="main" class="container-fluid col-xl-10 col-xl-offset-1"></div>
+  <div id="main"></div>
   <script src="bundle.js"></script>
 </body>
 </html>
