@@ -10,7 +10,7 @@ export default function(state = INITIAL_STATE, action) {
     case 'FETCH_FAVORITES':
       const images = splitIntoPages(action.payload.items, state.pageSize)
       return Object.assign({}, state, { images })
-    case 'UPDATE_PAGE_SIZE':
+    case 'CHANGE_FAVORITES_PAGE_SIZE':
       return Object.assign({}, state, { pageSize: action.pageSize })
     case 'SPLIT_PAGES':
       return Object.assign({}, state, { 

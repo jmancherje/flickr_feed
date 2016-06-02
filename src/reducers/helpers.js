@@ -1,5 +1,4 @@
 export function splitIntoPages(items, pageSize) {
-  
   const numberOfPages = Math.ceil(items.length / pageSize) || 1
   let allPages = []
   for (let i = 0; i < numberOfPages; i++) {
@@ -17,6 +16,20 @@ export function splitIntoPages(items, pageSize) {
       pageItems = []
     }
   }
-
   return allPages
+}
+
+export function unsplitPages(pages) {
+  console.log('pages...', pages)
+  if (pages.length < 1) {
+    return pages
+  }
+
+  const allItems = []
+  for (let i = 0; i < pages.length; i++) {
+    pages[i].forEach(item => {
+      allItems.push(item)
+    })
+  }
+  return allItems
 }

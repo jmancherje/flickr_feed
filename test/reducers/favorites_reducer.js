@@ -6,7 +6,7 @@ import dummy_data from '../dummy_data'
 
 describe('favorites reducer', () => {
 
-  it('handles UPDATE_PAGE_SIZE', () => {
+  it('handles CHANGE_FAVORITES_PAGE_SIZE', () => {
     const favorites = {
       data: "other data",
       items: []
@@ -15,7 +15,7 @@ describe('favorites reducer', () => {
       images: [],
       pageSize: 5
     }
-    const action = { type: 'UPDATE_PAGE_SIZE', pageSize: 10 }
+    const action = { type: 'CHANGE_FAVORITES_PAGE_SIZE', pageSize: 10 }
 
     const nextState = reducer(initialState, action)
 
