@@ -34,6 +34,13 @@ export function changeFavoritesPage(newPage) {
   }
 }
 
+export function changeCurrentImage(image) {
+  return {
+    type: 'CHANGE_CURRENT_IMAGE',
+    image
+  }
+}
+
 export function changeView(newView) {
   return {
     type: 'CHANGE_VIEW',
