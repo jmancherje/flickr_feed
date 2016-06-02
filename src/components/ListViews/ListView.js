@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { updateFeed, changeCurrentImage } from '../actions'
-import ImageCard from './ImageCard'
-import Pagination from './Pagination'
+import { updateFeed, changeCurrentImage } from '../../actions'
+import ImageCard from '../ImageCard'
+import Pagination from '../Pagination'
+import { Link } from 'react-router'
+import { determinePortrait } from './helpers'
 
 class ListView extends Component {
   componentWillMount() {
+    console.log(this.props)
     this.props.updateFeed()
   }
 
@@ -14,29 +17,19 @@ class ListView extends Component {
     this.context.router.push('/image')
   }
 
-  determinePortrait(image) {
-    const description = image.description
-    const startWidth = description.indexOf('width="') + 7
-    const endWidth = description.indexOf('"', startWidth)
-    const width = +description.substring(startWidth, endWidth)
-
-    const startHeight = description.indexOf('height="') + 8
-    const endHeight = description.indexOf('"', startHeight)
-    const height = +description.substring(startHeight, endHeight)
-
-    const aspectRatio = width / height
-    return aspectRatio < 1.333333333
-  }
-
   renderImages() {
     const page = this.props.pageNumber - 1
-    const self = this
+    if (this.props.images.length === 0 && this.props.location.pathname === '/favorites') {
+      return (
+        <h4>You have no favorites yet! Go back to the <Link to="/feed">Feed</Link> and select some favorites!</h4>
+      )
+    }
     return !this.props.images[page] ? null :
       this.props.images[page].map((item, index) => 
         <ImageCard viewImage={this.viewImage.bind(this)} 
                    imageData={item} 
                    key={index} 
-                   portrait={self.determinePortrait(item)} />
+                   portrait={determinePortrait(item)} />
       )
   }
 
@@ -56,11 +49,24 @@ ListView.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
-function mapStateToProps(state) {
+function mapStateToPropsFeed(state) {
   return {
     images: state.images.images,
     pageNumber: state.ui.feedPage
   }
 }
 
-export default connect(mapStateToProps, { updateFeed, changeCurrentImage })(ListView)
+function mapStateToPropsFavorites(state) {
+  return {
+    images: state.favorites.images,
+    pageNumber: state.ui.favoritesPage
+  }
+}
+
+const Feed = connect(mapStateToPropsFeed, { updateFeed, changeCurrentImage })(ListView)
+const Favorites = connect(mapStateToPropsFavorites, { updateFeed, changeCurrentImage })(ListView)
+
+export {
+  Feed,
+  Favorites
+}

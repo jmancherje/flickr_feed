@@ -1,20 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { renderTags } from './helpers'
 
 class ImageView extends Component {
-  
   componentWillMount() {
     const image = this.props.image
     if (!image.title) {
       this.context.router.push('/feed')
     }
-  }
-
-  renderTags(tags) {
-    const tagsList = this.props.image.tags.split(' ')
-    return tagsList.map((tag, i) => 
-      <span style={{ marginRight: '2px' }} className="label label-success">{tag}</span> 
-    )
   }
   
   render() {
@@ -28,7 +21,7 @@ class ImageView extends Component {
         <p>by: {image.author}</p>
         <div>
           Tags: 
-          {this.renderTags.call(this)}
+          {renderTags(image.tags)}
         </div>
         <button className="btn btn-primary">Favorite</button>
       </article>

@@ -7,7 +7,7 @@ import promise from 'redux-promise'
 
 import reducers from './reducers'
 import App from './components/App'
-import ListView from './components/ListView'
+import ListView from './components/ListViews/ListView'
 import routes from './routes'
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore)
