@@ -6,7 +6,9 @@ const ImageCard = ({
   portrait
 }) => (
   <figure className='image-card'>
-    <img className={portrait ? 'portrait' : 'landscape'} src={imageData.media.m} /> 
+    <img className={portrait ? 'portrait' : 'landscape'} 
+         src={imageData.media.m} 
+         onClick={viewImage.bind(this, imageData)} /> 
   </figure>
 )
 

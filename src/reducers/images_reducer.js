@@ -13,7 +13,6 @@ export default function(state = INITIAL_STATE, action) {
       const messyImages = state.images.concat([images])
       const allImages = unsplitPages(messyImages)
       const allPages = splitIntoPages(allImages, state.pageSize)
-      console.log('allPages: ', allPages)
       return Object.assign({}, state, {
         images: allPages
       })

@@ -20,7 +20,6 @@ export function splitIntoPages(items, pageSize) {
 }
 
 export function unsplitPages(pages) {
-  console.log('pages...', pages)
   if (pages.length < 1) {
     return pages
   }

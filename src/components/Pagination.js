@@ -61,7 +61,6 @@ class Pagination extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('global state', state)
   return state.ui
 }
 
