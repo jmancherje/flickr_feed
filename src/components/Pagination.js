@@ -47,7 +47,7 @@ class Pagination extends Component {
     return (
       <nav>
         <ul className="pagination">
-          <ReactCSSTransitionGroup transitionAppearTimeout={500} transitionEnterTimeout={500} transitionAppear={true} transitionLeaveTimeout={500} transitionName={ {
+          <ReactCSSTransitionGroup transitionAppearTimeout={500} transitionEnterTimeout={500} transitionAppear={true} transitionLeaveTimeout={50} transitionName={ {
               enter: 'enter',
               enterActive: 'enter-active',
               leave: 'leave',
@@ -61,6 +61,7 @@ class Pagination extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log('global state', state)
   return state.ui
 }
 

@@ -9,9 +9,9 @@ class ListView extends Component {
   }
 
   renderImages() {
-    const page = this.props.pageNumber
-    return !this.props.images[page - 1] ? null :
-      this.props.images[page - 1].map((item, index) => 
+    const page = this.props.pageNumber - 1
+    return !this.props.images[page] ? null :
+      this.props.images[page].map((item, index) => 
         <img key={index} src={item.media.m} height="150px" />
       )
   }
@@ -29,9 +29,8 @@ class ListView extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state.ui.feedPage)
   return {
-    images: state.images,
+    images: state.images.images,
     pageNumber: state.ui.feedPage
   }
 }
