@@ -47,11 +47,18 @@ class Pagination extends Component {
     return (
       <nav>
         <ul className="pagination">
-          <ReactCSSTransitionGroup transitionAppearTimeout={500} transitionEnterTimeout={500} transitionAppear={true} transitionLeaveTimeout={50} transitionName={ {
-              enter: 'enter',
-              enterActive: 'enter-active',
-              leave: 'leave',
-              leaveActive: 'leave-active'} }>
+          <ReactCSSTransitionGroup transitionAppearTimeout={500} 
+                                   transitionEnterTimeout={500} 
+                                   transitionAppear={true} 
+                                   transitionLeaveTimeout={50} 
+                                   transitionName={ {
+                                      enter: 'enter',
+                                      enterActive: 'enter-active',
+                                      leave: 'leave',
+                                      leaveActive: 'leave-active',
+                                      appear: 'appear',
+                                      appearActive: 'appearActive'} 
+                                   }>
             {this.pageList.call(this)}
           </ReactCSSTransitionGroup>
         </ul>
