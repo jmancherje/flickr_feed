@@ -1,0 +1,26 @@
+.hover {
+  position: fixed;
+  top: 50px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}
+
+.enter {
+  opacity: 0.01;
+}
+
+.enter.enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.image-card > img {
+  display: inline-block;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.image-card > img:hover {
+  box-shadow: 0 0 15px #7DBDE8;
+}
