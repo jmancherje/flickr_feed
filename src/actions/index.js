@@ -1,5 +1,6 @@
 import axios from 'axios'
 import jsonp from 'jsonp'
+import { browserHistory } from 'react-router'
 
 const ROOT_URL = 'http://localhost:3090'
 
@@ -54,12 +55,14 @@ export function signinUser({
   email,
   password
 }) {
-  return dispatch => {
+  return function (dispatch) {
     axios.post(`${ROOT_URL}/signin`, { email, password })
       .then(response => {
+        console.log('got response', response)
         dispatch({ type: 'AUTH_USER' })
         localStorage.setItem('token', response.data.token)
         // returning user sent to favorites
+        console.log('pushing to browser history', browserHistory)
         browserHistory.push('/favorites')
       })
       .catch(() => {
