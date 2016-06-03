@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { updateFeed, changeCurrentImage } from '../../actions'
 import ImageCard from '../ImageCard'
-import Pagination from '../Pagination'
+import Pagination from '../Pagination/Pagination'
 import { Link } from 'react-router'
 import { determinePortrait } from './helpers'
 
 class ListView extends Component {
   componentWillMount() {
-    console.log(this.props)
     this.props.updateFeed()
   }
 

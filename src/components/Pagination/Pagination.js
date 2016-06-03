@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { changeFeedPage } from '../actions'
+import { changeFeedPage } from '../../actions'
+import { pageLinks } from './PageLink'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 class Pagination extends Component {
@@ -9,33 +10,6 @@ class Pagination extends Component {
     return this.props.feedPage === pageNumber ? 
       "page-item active" :
       "page-item"
-  }
-
-  pageList() {
-    const pages = []
-    const self = this
-    let start = 1, 
-        end = this.props.numberOfPages
-
-    if (this.props.numberOfPages > 6) {
-      if (this.props.feedPage > 3 && this.props.feedPage < this.props.numberOfPages - 3) {
-        start = this.props.feedPage - 3
-        end = this.props.feedPage + 3
-      } else if (this.props.feedPage <= 3) {
-        end = 7
-      } else if (this.props.feedPage >= this.props.numberOfPages - 3) {
-        start = this.props.numberOfPages - 6
-      }
-    }
-    for (let i = start; i <= end; i++) {
-      pages.push(
-        <li className={this.linkClassName.call(this, i)} key={i}>
-          <a className="page-link"
-             href="#" 
-             onClick={(event) => {this.handlePageChange.call(this, event, i)}}>{ i }</a>
-        </li>)
-    }
-    return pages
   }
 
   handlePageChange(e, page) {
@@ -59,7 +33,7 @@ class Pagination extends Component {
                                       appear: 'appear',
                                       appearActive: 'appearActive'} 
                                    }>
-            {this.pageList.call(this)}
+            {pageLinks(this.handlePageChange.bind(this), this.props.numberOfPages, this.props.feedPage, this.linkClassName.bind(this))}
           </ReactCSSTransitionGroup>
         </ul>
       </nav>
