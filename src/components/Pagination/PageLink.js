@@ -9,6 +9,9 @@ export const pageLinks = (
   const pages = []
   const self = this
   const pageLimit = numberOfPages
+  if (pageLimit === 0) {
+    return null
+  }
   let start = 1, 
       end = pageLimit
 
