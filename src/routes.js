@@ -6,6 +6,7 @@ import { Feed, Favorites } from './components/ListViews/ListView'
 import ImageView from './components/ImageView/ImageView'
 import RequireAuth from './components/auth/require_auth'
 import Login from './components/auth/Login'
+import Signup from './components/auth/Signup'
 
 export default store => (
   <Route path='/' component={App}>
@@ -14,6 +15,7 @@ export default store => (
     <Route path='/favorites' component={RequireAuth(Favorites)} />
     <Route path='/image' component={ImageView} />
     <Route path='/login' component={Login} />
+    <Route path='/signup' component={Signup} />
 
   </Route>
 )

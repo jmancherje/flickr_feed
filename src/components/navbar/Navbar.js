@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import NavLink from './NavLink'
+import { signoutUser } from '../../actions'
 
 const links = [{
   to: '/feed',
@@ -12,8 +13,14 @@ const links = [{
 }]
 
 class Navbar extends Component {
+  signout(e) {
+    e.preventDefault()
+    this.props.signoutUser()
+    this.context.router.push('/feed')
+  }
+
   activeLink(link) {
-    return link.to === this.props.location
+    return link.to === this.props.ui.location
   }
 
   render() {
@@ -24,10 +31,13 @@ class Navbar extends Component {
           <ul className="nav navbar-nav">
             {links.map(link => 
               <NavLink key={link.text} linkClass={`nav-link ${this.activeLink.call(this, link) ? 'active-link' : ''}`} link={link} />
-              // <li className="nav-item" key={link.text}>
-              //   <Link className={`nav-link ${this.activeLink.call(this, link) ? 'active-link' : ''}`} to={link.to}>{link.text}</Link>
-              // </li>
             )}
+            <li className="nav-item pull-xs-right">
+              {this.props.auth.authenticated ? 
+                <a className="nav-link" href="#" onClick={this.signout.bind(this)}>Sign out</a> :
+                <Link className="nav-link" to="/signup" >Register</Link>
+              }
+            </li>
           </ul>
         </div>
       </nav>
@@ -40,7 +50,10 @@ Navbar.contextTypes = {
 }
 
 function mapStateToProps(state) {
-  return state.ui
+  return {
+    ui: state.ui,
+    auth: state.auth 
+  }
 }
 
-export default connect(mapStateToProps)(Navbar)
+export default connect(mapStateToProps, { signoutUser })(Navbar)

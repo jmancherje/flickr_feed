@@ -58,11 +58,9 @@ export function signinUser({
   return function (dispatch) {
     axios.post(`${ROOT_URL}/signin`, { email, password })
       .then(response => {
-        console.log('got response', response)
         dispatch({ type: 'AUTH_USER' })
         localStorage.setItem('token', response.data.token)
         // returning user sent to favorites
-        console.log('pushing to browser history', browserHistory)
         browserHistory.push('/favorites')
       })
       .catch(() => {
