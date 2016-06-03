@@ -5,13 +5,20 @@ import { renderTags } from './helpers'
 class ImageView extends Component {
   componentWillMount() {
     const image = this.props.image
-    if (!image.title) {
+    if (!image) {
       this.context.router.push('/feed')
     }
   }
-  
+
   render() {
-    const image = this.props.image
+    // to prevent crashing before a redirect back to feed on page refresh
+    const image = this.props.image || {
+      media: { m: ''},
+      title: 'hello',
+      published: 'hello',
+      author: 'hello',
+      tags: 'tags'
+    }
     return (
       <article className='image-view'>
         <img src={image.media.m} />
