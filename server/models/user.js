@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
+const Image = require('./image').schema;
 
 // define our model
 const userSchema = new Schema({
@@ -9,7 +10,8 @@ const userSchema = new Schema({
     unique: true,
     lowercase: true
   },
-  password: String
+  password: String,
+  favorites: [Image]
 })
 
 // On Save Hook, encrypt password
