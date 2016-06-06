@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "postinstall": "cd server; npm install; cd ..",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helpers.js 'test/**/*.@(js|jsx)'",
     "test:watch": "npm run test -- --watch --watch-extensions -jsx"
   },
@@ -35,12 +36,8 @@
   },
   "dependencies": {
     "axios": "^0.11.1",
-    "body-parser": "^1.15.1",
-    "cors": "^2.7.1",
-    "express": "^4.13.4",
     "immutable": "^3.8.1",
     "jsonp": "^0.2.0",
-    "morgan": "^1.7.0",
     "react": "^15.1.0",
     "react-addons-css-transition-group": "^15.1.0",
     "react-dom": "^15.1.0",
@@ -51,6 +48,7 @@
     "redux-form": "^5.2.5",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.1.0",
-    "request": "^2.72.0"
+    "request": "^2.72.0",
+    "redux-promise": "^0.5.3"
   }
 }

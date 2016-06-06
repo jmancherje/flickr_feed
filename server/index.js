@@ -1,8 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
 const morgan = require('morgan');
-const routes = require('./routes')
+const cors = require('cors');
+const routes = require('./routes');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:auth/auth')
 
 const app = express();
 app.set('port', (process.env.PORT || 8787));
