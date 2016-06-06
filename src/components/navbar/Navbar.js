@@ -20,7 +20,7 @@ class Navbar extends Component {
   }
 
   activeLink(link) {
-    return link.to === this.props.ui.location
+    return link.to === this.props.location
   }
 
   render() {
@@ -30,7 +30,7 @@ class Navbar extends Component {
           <Link className="navbar-brand" to="/">Flickr Feed</Link>
           <ul className="nav navbar-nav">
             {links.map(link => 
-              <NavLink key={link.text} linkClass={`nav-link ${this.activeLink.call(this, link) ? 'active-link' : ''}`} link={link} />
+              <NavLink key={link.text} linkClass={`nav-link ${this.activeLink.call(this, link) ? 'active' : ''}`} link={link} />
             )}
             <li className="nav-item pull-xs-right">
               {this.props.auth.authenticated ? 

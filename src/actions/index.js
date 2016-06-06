@@ -2,7 +2,7 @@ import axios from 'axios'
 import jsonp from 'jsonp'
 import { browserHistory } from 'react-router'
 
-const ROOT_URL = 'http://localhost:3090'
+const ROOT_URL = 'http://localhost:8787'
 
 export function updateFeed() {
   const request = new Promise(function (resolve, reject) {
@@ -56,7 +56,7 @@ export function signinUser({
   password
 }) {
   return function (dispatch) {
-    axios.post(`${ROOT_URL}/signin`, { email, password })
+    axios.post(`${ROOT_URL}/api/signin`, { email, password })
       .then(response => {
         dispatch({ type: 'AUTH_USER' })
         localStorage.setItem('token', response.data.token)
@@ -83,7 +83,7 @@ export function signoutUser() {
 
 export function signupUser({ email, password }) {
   return dispatch => {
-    axios.post(`${ROOT_URL}/signup`, { email, password })
+    axios.post(`${ROOT_URL}/api/signup`, { email, password })
       .then(response => {
         dispatch({ type: 'AUTH_USER' })
         localStorage.setItem('token', response.data.token)
