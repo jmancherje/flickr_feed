@@ -60,7 +60,7 @@ export function fetchFavorites() {
 
 export function changeCurrentImage(image) {
   return {
-    type: 'CHANGE_CURRENT_IMAGE',
+    type: actions.CHANGE_CURRENT_IMAGE,
     image
   }
 }
@@ -80,7 +80,7 @@ export function favoriteStatus(image) {
 
 export function favoriteCurrentImage() {
   return {
-    type: 'FAVORITE_CURRENT_IMAGE'
+    type: actions.FAVORITE_CURRENT_IMAGE
   }
 }
 

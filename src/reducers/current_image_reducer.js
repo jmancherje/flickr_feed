@@ -1,8 +1,10 @@
+import { CHANGE_CURRENT_IMAGE, FAVORITE_CURRENT_IMAGE } from '../actions/types'
+
 export default function(state = null, action) {
   switch(action.type) {
-    case 'CHANGE_CURRENT_IMAGE':
+    case CHANGE_CURRENT_IMAGE:
       return action.image
-    case 'FAVORITE_CURRENT_IMAGE':
+    case FAVORITE_CURRENT_IMAGE:
       if (!state) {
         return state
       }
