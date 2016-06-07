@@ -33,7 +33,7 @@ class Pagination extends Component {
       return null
     }
     return (
-      <nav>
+      <nav className="pagination-nav">
         <ul className="pagination">
           <ReactCSSTransitionGroup transitionAppearTimeout={500} 
                                    transitionEnterTimeout={500} 
@@ -50,7 +50,7 @@ class Pagination extends Component {
             {pageLinks(this.handlePageChange.bind(this), this.props.numberOfPages, this.props.feedPage, this.props.favoritesPage, this.props.currentView, this.linkClassName.bind(this))}
           </ReactCSSTransitionGroup>
         </ul>
-        <ul className="pagination" style={{ float: 'right' }}>
+        <ul className="pagination hidden-xs-down" style={{ float: 'right' }}>
           {pageSizes(this.props.pageSize, this.props.changePageSize)}
         </ul>
       </nav>
