@@ -13,7 +13,8 @@ describe('images reducer', () => {
     }
     const initialState = {
       images: [],
-      pageSize: 5
+      pageSize: 5,
+      fetching: false
     }
     const action = { type: FETCH_IMAGES, payload: flickrData }
 
@@ -21,7 +22,8 @@ describe('images reducer', () => {
 
     expect(nextState).to.deep.equal({
       images: [[{ title: 'image1' }, { title: 'image2' }]],
-      pageSize: 5
+      pageSize: 5,
+      fetching: false
     })
   })
 
@@ -32,7 +34,8 @@ describe('images reducer', () => {
     }
     const initialState = { 
       images: [[{ title: 'image1' }, { title: 'image2' }]],
-      pageSize: 3 
+      pageSize: 3,
+      fetching: false
     }
     const action = { type: FETCH_IMAGES, payload: flickrData }
 
@@ -40,7 +43,8 @@ describe('images reducer', () => {
 
     expect(nextState).to.deep.equal({
       images: [[{ title: 'image1' }, { title: 'image2' }, { title: 'image3' }], [{ title: 'image4' }]],
-      pageSize: 3
+      pageSize: 3,
+      fetching: false
     })
   })
 

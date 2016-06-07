@@ -10,7 +10,8 @@ describe('favorites reducer', () => {
     const favorites = [{ title: 'image3' }, { title: 'image4' }]
     const initialState = { 
       images: [],
-      pageSize: 4
+      pageSize: 4,
+      fetching: false
     }
     const action = { type: FETCH_FAVORITES, payload: { data: favorites } }
 
@@ -18,7 +19,8 @@ describe('favorites reducer', () => {
 
     expect(nextState).to.deep.equal({ 
       images: [[{ title: 'image3' }, { title: 'image4' }]],
-      pageSize: 4
+      pageSize: 4,
+      fetching: false
     })
   })
 
@@ -26,14 +28,16 @@ describe('favorites reducer', () => {
     const favorites = [{ title: 'image3' }, { title: 'image4' }, { title: 'image5' }]
     const initialState = { 
       images: [[{ title: 'image3' }, { title: 'image4' }]],
-      pageSize: 4
+      pageSize: 4,
+      fetching: false
     }
     const action = { type: FETCH_FAVORITES, payload: { data: favorites } }
     const nextState = reducer(initialState, action)
 
     expect(nextState).to.deep.equal({ 
       images: [[{ title: 'image3' }, { title: 'image4' }, { title: 'image5' }]],
-      pageSize: 4
+      pageSize: 4,
+      fetching: false
     })
   })
 
@@ -41,14 +45,16 @@ describe('favorites reducer', () => {
     const favorites = []
     const initialState = {
       images: [],
-      pageSize: 10
+      pageSize: 10,
+      fetching: false
     }
     const action = { type: FETCH_FAVORITES, payload: { data: favorites } }
     const nextState = reducer(initialState, action)
 
     expect(nextState).to.deep.equal({
       images: [],
-      pageSize: 10
+      pageSize: 10,
+      fetching: false
     })
   })
 })
