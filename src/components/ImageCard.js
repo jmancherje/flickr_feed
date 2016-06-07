@@ -1,9 +1,9 @@
 import React from 'react'
 
 function formatTitle(string, size) {
-  // limit title length so it doesn't show before hover
   let title = string;
-  if (!string) {
+  // some images have empty title or title that is one space
+  if (!string || string === ' ') {
     title = 'untitled'
   } else if (string.length > size + 3) {
     title = string.substring(0, size + 1) + '...'
