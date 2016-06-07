@@ -1,0 +1,22 @@
+{
+  "name": "flickr",
+  "description": "Flickr feed app",
+  "main": "index.js",
+  "authors": [
+    "Justin Mancherje"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/jmancherje/flickr_feed",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "lib"
+  ],
+  "dependencies": {
+    "bootstrap": "v4.0.0-alpha.2"
+  }
+}
