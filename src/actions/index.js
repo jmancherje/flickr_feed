@@ -28,21 +28,21 @@ export function updateFeed() {
 
 export function changeFeedPage(newPage) {
   return {
-    type: 'CHANGE_FEED_PAGE',
+    type: actions.CHANGE_FEED_PAGE,
     newPage
   }
 }
 
 export function changeFavoritesPage(newPage) {
   return {
-    type: 'CHANGE_FAVORITES_PAGE',
+    type: actions.CHANGE_FAVORITES_PAGE,
     newPage
   }
 }
 
 export function changeView(newView) {
   return {
-    type: 'CHANGE_VIEW',
+    type: actions.CHANGE_VIEW,
     newView
   }
 }

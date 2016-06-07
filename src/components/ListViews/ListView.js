@@ -40,10 +40,12 @@ class ListView extends Component {
 
   render() {
     return (
-      <div>
+      <div className="list-view">
         <button onClick={this.props.updateFeed}>Fetch More</button>
         <Pagination path={this.props.location.pathname} numberOfPages={this.props.images.length} />
-        {this.renderImages.call(this)}
+        <section className="wrap">
+          {this.renderImages.call(this)}
+        </section>
         <Pagination path={this.props.location.pathname} numberOfPages={this.props.images.length} />
       </div>
     )
