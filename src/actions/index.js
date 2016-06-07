@@ -99,6 +99,34 @@ export function removeFavorite(id) {
   })
 }
 
+export function changeFeedPageSize(newSize) {
+  return dispatch => {
+    dispatch({ type: actions.CHANGE_FEED_PAGE_SIZE, newSize })
+    dispatch(splitFeedPages())
+    dispatch(changeFeedPage(1))
+  }
+}
+
+function splitFeedPages() {
+  return {
+    type: actions.SPLIT_FEED_PAGES
+  }
+}
+
+export function changeFavoritesPageSize(newSize) {
+  return dispatch => {
+    dispatch({ type: actions.CHANGE_FAVORITES_PAGE_SIZE, newSize })
+    dispatch(splitFavoritesPages())
+    dispatch(changeFavoritesPage(1))
+  }
+}
+
+function splitFavoritesPages() {
+  return {
+    type: actions.SPLIT_FAVORITES_PAGES
+  }
+}
+
 // AUTH
 
 export function signinUser({
