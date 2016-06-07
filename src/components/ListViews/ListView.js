@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { updateFeed, changeCurrentImage } from '../../actions'
+import { updateFeed, changeCurrentImage, fetchFavorites } from '../../actions'
 import ImageCard from '../ImageCard'
 import Pagination from '../Pagination/Pagination'
 import { Link } from 'react-router'
@@ -8,12 +8,18 @@ import { determinePortrait } from './helpers'
 
 class ListView extends Component {
   componentWillMount() {
-    this.props.updateFeed()
+    if (this.props.location.pathname === '/favorites') {
+      this.props.fetchFavorites()
+    }
   }
 
   viewImage(image) {
     this.props.changeCurrentImage(image)
-    this.context.router.push('/image')
+    if (this.props.location.pathname === '/feed') {
+      this.context.router.push('/image')
+    } else if (this.props.location.pathname === '/favorites') {
+      this.context.router.push('/favorite')
+    }
   }
 
   renderImages() {
@@ -36,9 +42,9 @@ class ListView extends Component {
     return (
       <div>
         <button onClick={this.props.updateFeed}>Fetch More</button>
-        <Pagination numberOfPages={this.props.images.length} />
+        <Pagination path={this.props.location.pathname} numberOfPages={this.props.images.length} />
         {this.renderImages.call(this)}
-        <Pagination numberOfPages={this.props.images.length} />
+        <Pagination path={this.props.location.pathname} numberOfPages={this.props.images.length} />
       </div>
     )
   }
@@ -49,6 +55,7 @@ ListView.contextTypes = {
 }
 
 function mapStateToPropsFeed(state) {
+  console.log('state in feed', state)
   return {
     images: state.images.images,
     pageNumber: state.ui.feedPage
@@ -63,7 +70,7 @@ function mapStateToPropsFavorites(state) {
 }
 
 const Feed = connect(mapStateToPropsFeed, { updateFeed, changeCurrentImage })(ListView)
-const Favorites = connect(mapStateToPropsFavorites, { updateFeed, changeCurrentImage })(ListView)
+const Favorites = connect(mapStateToPropsFavorites, { changeCurrentImage, fetchFavorites })(ListView)
 
 export {
   Feed,

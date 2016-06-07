@@ -15,6 +15,10 @@ class App extends Component {
     }
   }
 
+  componentWillMount() {
+    this.props.updateFeed()
+  }
+
   componentDidMount() {
     this.fetchEveryMinute = window.setInterval(this.fetchAndAlert.bind(this), 60000)
   }
