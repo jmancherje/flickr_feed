@@ -25,9 +25,13 @@ class ListView extends Component {
   renderImages() {
     const page = this.props.pageNumber - 1
     if (this.props.images.length === 0 && this.props.location.pathname === '/favorites') {
-      return (
-        <h4>You have no favorites yet! Go back to the <Link to="/feed">Feed</Link> and select some favorites!</h4>
-      )
+      if (this.props.fetching) {
+        return <img src="./assets/flickr.gif" alt="flickr spinner" />
+      } else {
+        return (
+          <h4>You have no favorites yet! Go back to the <Link to="/feed">Feed</Link> and select some favorites!</h4>
+        )
+      }
     }
     return !this.props.images[page] ? null :
       this.props.images[page].map((item, index) => 
@@ -67,7 +71,8 @@ function mapStateToPropsFeed(state) {
 function mapStateToPropsFavorites(state) {
   return {
     images: state.favorites.images,
-    pageNumber: state.ui.favoritesPage
+    pageNumber: state.ui.favoritesPage,
+    fetching: state.favorites.fetching
   }
 }
 
