@@ -1,0 +1,63 @@
+.image-view {
+
+}
+
+.favorite-btn {
+  margin-bottom: 5px;
+}
+
+.image-container > img.portrait {
+  height: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+.image-container > img.landscape {
+  width: 100%;
+}
+
+.image-container {
+  display: block;
+}
+
+.display-image-row {
+  background-color: #D6D6D6;
+  padding: 15px 0 15px 0;
+  margin-top: -20px;
+  position: relative;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  display: inline;
+  color: #C59595;
+  cursor: pointer;
+  font-size: 3rem;
+}
+
+@media only screen and (max-width : 480px) {
+  /* Smartphone view: 1 tile */
+  .image-container.portrait {
+    height: 400px;
+  }
+}
+@media only screen and (max-width : 650px) and (min-width : 481px) {
+  /* Tablet view: 2 tiles */
+  .image-container.portrait {
+    height: 500px;
+  }
+}
+@media only screen and (max-width : 1050px) and (min-width : 651px) {
+  /* Small desktop / ipad view: 3 tiles */
+  .image-container.portrait {
+    height: 600px;
+  }
+}
+@media only screen and (min-width : 1051px) {
+  /* Medium desktop: 4 tiles */
+  .image-container.portrait {
+    height: 700px;
+  }
+}

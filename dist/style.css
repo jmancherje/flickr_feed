@@ -33,11 +33,11 @@ body {
   transition: opacity 500ms ease-in;
 }
 
-img.portrait {
+.boxInner > img.portrait {
   width: 100%;
 }
 
-img.landscape {
+.boxInner > img.landscape {
   height: 100%;
 }
 

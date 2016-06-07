@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { renderTags } from './helpers'
+import { determinePortrait } from '../ListViews/helpers'
 import { addFavorite, removeFavorite, favoriteStatus, changeCurrentImage } from '../../actions'
 
 class ImageView extends Component {
@@ -9,6 +10,11 @@ class ImageView extends Component {
     if (!image) {
       this.context.router.push('/feed')
     }
+  }
+
+  formatDate(date) {
+    const split = date.split('T')
+    return split[0]
   }
 
   deleteFavorite(id) {
@@ -27,11 +33,11 @@ class ImageView extends Component {
 
   showButton(image) {
     if (this.props.location.pathname === '/favorite') {
-      return <button className="btn btn-danger" onClick={this.deleteFavorite.bind(this, image._id)} >Remove Favorite</button>
+      return <button className="btn btn-danger favorite-btn" onClick={this.deleteFavorite.bind(this, image._id)} >Remove Favorite</button>
     } else if (image.favorite || !this.props.auth) {
-      return <button className="btn btn-primary" disabled>Favorite</button>
+      return <button className="btn btn-primary favorite-btn" disabled>Favorite</button>
     } else {
-      return <button className="btn btn-primary" onClick={this.favorite.bind(this, image)} >Favorite</button>
+      return <button className="btn btn-primary favorite-btn" onClick={this.favorite.bind(this, image)} >Favorite</button>
     }
   }
 
@@ -43,22 +49,30 @@ class ImageView extends Component {
       published: 'hello',
       author: 'hello',
       tags: 'tags',
-      id: '1'
+      id: '1',
+      description: ''
     }
-    console.log('image', image)
+
     return (
       <article className='image-view'>
-        <img src={image.media ? image.media.m : image.url} />
-        <h4>{image.title}</h4>
-        <a href={image.link} target="_blank">View on Flickr</a>
-        <p>published: {image.published}</p>
-        <p>by: {image.author}</p>
-        <button onClick={() => console.log(image)}>show image</button>
-        <div>
-          Tags: 
-          {renderTags(image.tags)}
+        <div className="display-image-row row">
+          <div className={`${determinePortrait(image) ? 'portrait' : 'landscape'} col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 col-xl-6 col-xl-offset-3 image-container`}>
+            <img className={`image-large ${determinePortrait(image) ? 'portrait' : 'landscape'}`} src={image.media ? image.media.m : image.url} />
+          </div>
+          <h4 className="back-button" onClick={() => this.context.router.goBack()}>X</h4>
         </div>
-        {this.showButton(image)}
+        <hr/>
+        <div className="flickr-data col-sm-6 col-sm-offset-3">
+          <h4>Title: {image.title}</h4>
+          <p>published: {this.formatDate(image.published)}</p>
+          <p>by: {image.author}</p>
+          {this.showButton(image)}
+          <div>
+            Tags: &nbsp;
+            {renderTags(image.tags)}
+          </div>
+          <a href={image.link} target="_blank">View on Flickr</a>
+        </div>
       </article>
     )
   }
