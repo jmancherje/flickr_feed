@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { changeFeedPage, changeFavoritesPage } from '../../actions'
 import { pageLinks } from './PageLink'
+import { pageSizes } from './PageSizeLinks'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 class Pagination extends Component {
@@ -23,12 +24,14 @@ class Pagination extends Component {
     if (this.props.path === '/feed') {
       this.props.changeFeedPage(page)
     } else {
-      console.log('changing favorites page')
       this.props.changeFavoritesPage(page)
     }
   }
 
   render() {
+    if (this.props.numberOfPages === 0) {
+      return null
+    }
     return (
       <nav>
         <ul className="pagination">
@@ -47,6 +50,9 @@ class Pagination extends Component {
             {pageLinks(this.handlePageChange.bind(this), this.props.numberOfPages, this.props.feedPage, this.props.favoritesPage, this.props.currentView, this.linkClassName.bind(this))}
           </ReactCSSTransitionGroup>
         </ul>
+        <ul className="pagination" style={{ float: 'right' }}>
+          {pageSizes(this.props.pageSize, this.props.changePageSize)}
+        </ul>
       </nav>
     )
   }
@@ -59,27 +65,5 @@ Pagination.contextTypes = {
 function mapStateToProps(state) {
   return state.ui
 }
-
-// function mapStateToPropsFavorites(state) {
-//   return {
-//     currentPage: state.ui.favoritesPage,
-//     currentView: state.ui.currentView
-//   }
-// }
-
-// function mapStateToPropsFeed(state) {
-//   return {
-//     currentPage: state.ui.feedPage,
-//     currentView: state.ui.currentView
-//   }
-// }
-
-// const FavoritesPagination = connect(mapStateToPropsFavorites, { changeFavoritesPage })(Pagination)
-// const FeedPagination = connect(mapStateToPropsFeed, { changeFeedPage })(Pagination)
-
-// export {
-//   FavoritesPagination,
-//   FeedPagination
-// }
 
 export default connect(mapStateToProps, { changeFeedPage, changeFavoritesPage })(Pagination)

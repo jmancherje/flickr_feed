@@ -11,9 +11,6 @@ export const pageLinks = (
   const pages = []
   const self = this
   const pageLimit = numberOfPages
-  if (pageLimit === 0) {
-    return null
-  }
   let start = 1, 
       end = pageLimit,
       currentPage
@@ -45,14 +42,14 @@ export const pageLinks = (
     <li className="page-item" key={'last'}>
       <a href="#"
          className="page-link"
-         onClick={event => {handlePageChange(event, pageLimit)}}>{'>>'}</a>
+         onClick={event => {handlePageChange(event, pageLimit)}}>{'>'}</a>
     </li>
   )
   pages.unshift(
     <li className="page-item" key={'first'}>
       <a href="#"
          className="page-link"
-         onClick={event => {handlePageChange(event, 1)}}>{'<<'}</a>
+         onClick={event => {handlePageChange(event, 1)}}>{'<'}</a>
     </li>
   )
   return pages
