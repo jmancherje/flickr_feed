@@ -6,6 +6,15 @@ import { AUTH_USER, AUTH_ERROR, UNAUTH_USER } from '../../src/actions/types'
 
 describe('auth reducer', () => {
 
+  it('handles unknown action types', () => {
+    const initialState = {}
+    const action = { type: 'authenticate' }
+
+    const nextState = reducer(initialState, action)
+
+    expect(nextState).to.deep.equal(initialState)
+  })
+
   describe('AUTH_USER', () => {
     it('initially sets user authenticated to true', () => {
       const initialState = {}

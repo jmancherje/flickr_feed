@@ -1,3 +1,5 @@
+import { CHANGE_VIEW, CHANGE_FEED_PAGE, CHANGE_FAVORITES_PAGE } from '../actions/types'
+
 const INITIAL_STATE = {
   feedPage: 1,
   favoritesPage: 1,
@@ -6,11 +8,11 @@ const INITIAL_STATE = {
 
 export default function(state = INITIAL_STATE, action) {
   switch(action.type) {
-    case 'CHANGE_FEED_PAGE':
+    case CHANGE_FEED_PAGE:
       return Object.assign({}, state, { feedPage: action.newPage })
-    case 'CHANGE_FAVORITES_PAGE':
+    case CHANGE_FAVORITES_PAGE:
       return Object.assign({}, state, { favoritesPage: action.newPage })
-    case 'CHANGE_VIEW':
+    case CHANGE_VIEW:
       return Object.assign({}, state, { currentView: action.newView })
     default:
       return state
