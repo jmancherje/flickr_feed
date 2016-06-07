@@ -32,3 +32,23 @@ export function unsplitPages(pages) {
   }
   return allItems
 }
+
+export function toggleFavoriteImage(link, images) {
+  for (let i = 0; i < images.length; i++) {
+    for (let k = 0; k < images[i].length; k++) {
+      console.log('image i k', images[i][k], link)
+      if (images[i][k].link === link) {
+        console.log('found link...')
+        const image = images[i][k]
+        // if image.favorite is undefined or false
+        if (!image.favorite) {
+          image.favorite = true
+        } else {
+          image.favorite = false
+        }
+        return images
+      }
+    }
+  }
+  return images
+}

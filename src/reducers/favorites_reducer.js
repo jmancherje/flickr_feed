@@ -8,7 +8,17 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
   switch(action.type) {
     case 'FETCH_FAVORITES':
-      const images = splitIntoPages(action.payload.items, state.pageSize)
+      // To keep state === [] if no favorites. 
+      // Essential to show 'no favorites' message
+      if (!action.payload.data.length) {
+        return {
+          pageSize: state.pageSize,
+          images: []
+        }
+      }
+
+      const favorites = action.payload.data
+      const images = splitIntoPages(favorites, state.pageSize)
       return Object.assign({}, state, { images })
     case 'CHANGE_FAVORITES_PAGE_SIZE':
       return Object.assign({}, state, { pageSize: action.pageSize })

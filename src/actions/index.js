@@ -4,6 +4,10 @@ import { browserHistory } from 'react-router'
 
 const ROOT_URL = 'http://localhost:8787'
 
+export function checkUser() {
+  return axios.get(`${ROOT_URL}/api/checkuser`)
+}
+
 export function updateFeed() {
   const request = new Promise(function (resolve, reject) {
     jsonp('https://api.flickr.com/services/feeds/photos_public.gne?format=json', { name: 'jsonFlickrFeed' }, function(err, data) {
@@ -35,6 +39,24 @@ export function changeFavoritesPage(newPage) {
   }
 }
 
+export function changeView(newView) {
+  return {
+    type: 'CHANGE_VIEW',
+    newView
+  }
+}
+
+export function fetchFavorites() {
+  const request = axios.get(`${ROOT_URL}/api/favorites`, {
+    headers: { authorization: localStorage.getItem('token') }
+  })
+
+  return {
+    type: 'FETCH_FAVORITES',
+    payload: request
+  }
+}
+
 export function changeCurrentImage(image) {
   return {
     type: 'CHANGE_CURRENT_IMAGE',
@@ -42,11 +64,32 @@ export function changeCurrentImage(image) {
   }
 }
 
-export function changeView(newView) {
-  return {
-    type: 'CHANGE_VIEW',
-    newView
+export function addFavorite(image) {
+  return axios.post(`${ROOT_URL}/api/favorites`, image, {
+    headers: { authorization: localStorage.getItem('token') }
+  })
+}
+
+export function favoriteStatus(image) {
+  return dispatch => {
+    dispatch({ type: 'TOGGLE_FEED_FAVORITE', image })
+    dispatch(favoriteCurrentImage())
   }
+}
+
+export function favoriteCurrentImage() {
+  return {
+    type: 'FAVORITE_CURRENT_IMAGE'
+  }
+}
+
+export function removeFavorite(id) {
+  return axios({
+    method: 'delete',
+    url: `${ROOT_URL}/api/favorites`,
+    data: { id: id },
+    headers: { authorization: localStorage.getItem('token') }
+  })
 }
 
 // AUTH
