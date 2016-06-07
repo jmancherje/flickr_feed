@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { splitIntoPages } from '../../src/reducers/helpers'
+import { splitIntoPages, toggleFavoriteImage } from '../../src/reducers/helpers'
 
 describe('reducer helpers / logic', () => {
 
@@ -38,6 +38,38 @@ describe('reducer helpers / logic', () => {
 
       expect(allPages.length).to.equal(3)
       expect(allPages).to.deep.equal([[1, 2, 3], [4, 5, 6], [7]])
+    })
+
+  })
+
+  describe('toggleFavoriteImage', () => {
+
+    it('returns original list of images if image is (somehow) not found', () => {
+      const images = [[{ title: 'img1', link: 'http://google.com/img' }], [{ title: 'img2', link: 'http://google.com/img2' }]]
+      const newImages = toggleFavoriteImage('http://image1.com/', images);
+
+      expect(images).to.equal(newImages)
+    })
+
+    it('toggles an image to favorite: true if image is has no existing favorite property', () => {
+      const images = [[{ title: 'img1', link: 'http://google.com/img' }], [{ title: 'img2', link: 'http://google.com/img2' }]]
+      const newImages = toggleFavoriteImage('http://google.com/img', images);
+
+      expect(images).to.deep.equal([[{ title: 'img1', link: 'http://google.com/img', favorite: true }], [{ title: 'img2', link: 'http://google.com/img2' }]])
+    })
+
+    it('toggles an image to favorite: true if image is has no favorite property set to false', () => {
+      const images = [[{ title: 'img1', link: 'http://google.com/img', favorite: false }], [{ title: 'img2', link: 'http://google.com/img2' }]]
+      const newImages = toggleFavoriteImage('http://google.com/img', images);
+
+      expect(images).to.deep.equal([[{ title: 'img1', link: 'http://google.com/img', favorite: true }], [{ title: 'img2', link: 'http://google.com/img2' }]])
+    })
+
+    it('toggles an image to favorite: false if image is has no favorite property set to true', () => {
+      const images = [[{ title: 'img1', link: 'http://google.com/img', favorite: true }], [{ title: 'img2', link: 'http://google.com/img2' }]]
+      const newImages = toggleFavoriteImage('http://google.com/img', images);
+
+      expect(images).to.deep.equal([[{ title: 'img1', link: 'http://google.com/img', favorite: false }], [{ title: 'img2', link: 'http://google.com/img2' }]])
     })
 
   })

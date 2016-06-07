@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 
 import reducer from '../../src/reducers/images_reducer'
-import dummy_data from '../dummy_data'
+import { FETCH_IMAGES } from '../../src/actions/types'
 
 
 describe('images reducer', () => {
@@ -11,25 +11,37 @@ describe('images reducer', () => {
       title: "dummy title",
       items: [{ title: 'image1' }, { title: 'image2' }]
     }
-    const initialState = []
-    const action = { type: 'FETCH_IMAGES', payload: flickrData }
+    const initialState = {
+      images: [],
+      pageSize: 5
+    }
+    const action = { type: FETCH_IMAGES, payload: flickrData }
 
     const nextState = reducer(initialState, action)
 
-    expect(nextState).to.deep.equal([[{ title: 'image1' }, { title: 'image2' }]])
+    expect(nextState).to.deep.equal({
+      images: [[{ title: 'image1' }, { title: 'image2' }]],
+      pageSize: 5
+    })
   })
 
-  it('formats subsequent fetch calls into new nested arrays', () => {
+  it('formats subsequent fetch calls into separate pages if there are more items than page size', () => {
     const flickrData = {
       title: "another dummy title",
       items: [{ title: 'image3' }, { title: 'image4' }]
     }
-    const initialState = [[{ title: 'image1' }, { title: 'image2' }]]
-    const action = { type: 'FETCH_IMAGES', payload: flickrData }
+    const initialState = { 
+      images: [[{ title: 'image1' }, { title: 'image2' }]],
+      pageSize: 3 
+    }
+    const action = { type: FETCH_IMAGES, payload: flickrData }
 
     const nextState = reducer(initialState, action)
 
-    expect(nextState).to.deep.equal([[{ title: 'image1' }, { title: 'image2' }], [{ title: 'image3' }, { title: 'image4' }]])
+    expect(nextState).to.deep.equal({
+      images: [[{ title: 'image1' }, { title: 'image2' }, { title: 'image3' }], [{ title: 'image4' }]],
+      pageSize: 3
+    })
   })
 
   it('handles unknown/unrelated action types', () => {
