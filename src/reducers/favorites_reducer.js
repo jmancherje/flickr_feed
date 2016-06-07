@@ -1,9 +1,10 @@
 import { splitIntoPages } from './helpers'
-import { FETCH_FAVORITES } from '../actions/types'
+import { FETCH_FAVORITES, FETCH_FAVORITES_REQUEST } from '../actions/types'
 
 const INITIAL_STATE = {
   images: [],
-  pageSize: 5
+  pageSize: 10,
+  fetching: false
 }
 
 export default function(state = INITIAL_STATE, action) {
@@ -14,13 +15,16 @@ export default function(state = INITIAL_STATE, action) {
       if (!action.payload.data.length) {
         return {
           pageSize: state.pageSize,
-          images: []
+          images: [],
+          fetching: false
         }
       }
 
       const favorites = action.payload.data
       const images = splitIntoPages(favorites, state.pageSize)
-      return Object.assign({}, state, { images })
+      return Object.assign({}, state, { images, fetching: false })
+    case FETCH_FAVORITES_REQUEST:
+      return Object.assign({}, state, { fetching: true })
     case 'CHANGE_FAVORITES_PAGE_SIZE':
       return Object.assign({}, state, { pageSize: action.pageSize })
     case 'SPLIT_PAGES':

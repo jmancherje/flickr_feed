@@ -48,15 +48,28 @@ export function changeView(newView) {
 }
 
 export function fetchFavorites() {
-  const request = axios.get(`${ROOT_URL}/api/favorites`, {
-    headers: { authorization: localStorage.getItem('token') }
-  })
-
-  return {
-    type: actions.FETCH_FAVORITES,
-    payload: request
+  return dispatch => {
+    dispatch(fetchFavoritesRequest())
+    axios.get(`${ROOT_URL}/api/favorites`, {
+      headers: { authorization: localStorage.getItem('token') }
+    })
+      .then(response => {
+        dispatch({ type: actions.FETCH_FAVORITES, payload: response })
+      })
   }
 }
+
+function fetchFavoritesRequest() {
+  return {
+    type: actions.FETCH_FAVORITES_REQUEST
+  }
+}
+
+// function fetchFavoritesSuccess() {
+//   return {
+//     type: actions.FETCH_FAVORITES_SUCCESS
+//   }
+// }
 
 export function changeCurrentImage(image) {
   return {
