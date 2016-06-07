@@ -2,7 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const imageSchema = new Schema({
-  jsonData: String
+  author: String,
+  author_id: String,
+  date_taken: String,
+  description: String,
+  link: String,
+  published: String,
+  tags: String,
+  title: String,
+  url: String
 })
 
 // imageSchema.pre('remove', function(next) {

@@ -1,65 +1,58 @@
-const Image = require('../models/image');
 const User = require('../models/user');
+const Image = require('../models/image');
+var ObjectId = require('mongoose').Types.ObjectId;
 
-exports.addImage = function(req, res, next) {
-  const imageData = JSON.stringify(req.body);
-  const favorite = new Image({ jsonData: imageData })
-  favorite.save()
+exports.addFavorite = function(req, res, next) {
+  const email = req.user.email;
+  imageData = req.body;
+  imageData.url = req.body.media.m;
+
+  const newImg = new Image(imageData);
+  newImg.save()
     .then(function(image) {
-      const imageId = image._id
-      User.findOne({ email: req.user.email }, function(err, user) {
-        user.favorites.push(imageId)
-        user.save()
-          .then(function(user) {
-            res.sendStatus(201)
-          })
-      })
-    })
-    .catch(function(error) {
-      res.status(500).send(error)
-    })
-};
-
-exports.fetchImages = function(req, res, next) {
-  const query = { email: req.user.email };
-
-  User.findOne(query, function(err, user) {
-    const ids = user.favorites;
-    Image.find({
-      '_id': { $in: ids }
-    }, function(err, images) {
-      console.log('all favorites', images);
-      res.status(200).send(images);
-    })
-  })
-};
-
-exports.removeImage = function(req, res, next) {
-  const imageId = req.body.id;
-  // find Image by Id
-  Image.findOne({ '_id': imageId }, function(err, image) {
-    if (err) {
-      console.error('error finding favorite image', err)
-    } else {
-      image.remove(function(err, doc) {
-        if (err) {
-          console.error('error removing favorite image', err)
-        } else {
-          User.update(
-            { email: req.user.email },
-            { $pull: { favorites: { _id: imageId } } }
-          )
-            .then(function(err, doc) {
-              console.log('err, doc', err, doc)
-              res.sendStatus(202);           
-            })
-        }
-      })
-    }
-  })
+      User.findOneAndUpdate(
+        { email: email },
+        { $push: { favorites: image._id } },
+        function(err, doc) {
+          if (err) { console.error(err) }
+          res.status(201).send(doc)
+        });
+    });
 }
 
-exports.checkUser = function(req, res, next) {
-  console.log('user', req.user)
-  res.status(200).send(req.user)
+exports.getFavorites = function(req, res, next) {
+  const email = req.user.email;
+
+  User.findOne({ email: email })
+    .populate('favorites')
+    .exec(function (err, user) {
+      if (err) { console.error(err) }
+      res.status(200).send(user.favorites)
+    });
+}
+
+exports.deleteImageById = function(req, res, next) {
+  const email = req.user.email;
+  const id = req.body.id;
+
+  Image.findOneAndRemove({ _id: id })
+    .exec(function(err, removed) {
+      User.findOneAndUpdate(
+        { email: email },
+        { $pull: { favorites: id } },
+        { new: true },
+        function(err, removedFromUser) {
+          if (err) { console.error(err) }
+          res.status(200).send(removedFromUser)
+        })
+    })
+}
+
+exports.findUser = function(req, res, next) {
+  const email = req.user.email;
+
+  User.findOne({ email: email })
+    .then(function(user) {
+      res.send(user)
+    })
 }

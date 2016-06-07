@@ -11,7 +11,7 @@ const userSchema = new Schema({
     lowercase: true
   },
   password: String,
-  favorites: [Image]
+  favorites: [{ type: Schema.Types.ObjectId, ref: 'image' }]
 })
 
 // On Save Hook, encrypt password

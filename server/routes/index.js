@@ -13,9 +13,9 @@ const ImageController = require('../controllers/image')
 const router = express.Router();
 router.post('/signin', requireSignin, Authentication.signin);
 router.post('/signup', Authentication.signup);
-router.get('/favorites', requireAuth, ImageController.fetchImages);
-router.post('/favorites', requireAuth, ImageController.addImage);
-router.delete('/favorites', requireAuth, ImageController.removeImage);
-router.get('/checkuser', requireAuth, ImageController.checkUser);
+router.get('/favorites', requireAuth, ImageController.getFavorites);
+router.post('/favorites', requireAuth, ImageController.addFavorite);
+router.delete('/favorites', requireAuth, ImageController.deleteImageById);
+router.get('/checkuser', requireAuth, ImageController.findUser);
 
 module.exports = router;
