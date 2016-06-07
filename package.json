@@ -4,7 +4,8 @@
   "description": "Flickr feed app",
   "main": "index.js",
   "scripts": {
-    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "start": "node server/index.js",
+    "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "postinstall": "cd server; npm install; cd ..",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helpers.js 'test/**/*.@(js|jsx)'",
     "test:watch": "npm run test -- --watch --watch-extensions -jsx"

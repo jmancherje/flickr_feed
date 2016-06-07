@@ -4,21 +4,24 @@ const morgan = require('morgan');
 const cors = require('cors');
 const routes = require('./routes');
 const mongoose = require('mongoose');
+const path = require('path');
 
-// mongoose.connect('mongodb://localhost:auth/auth')
-mongoose.connect('mongodb://flick:justin@ds027155.mlab.com:27155/flickr')
+const mongoURI = process.env.mongoURI || 'mongodb://flick:justin@ds027155.mlab.com:27155/flickr';
+mongoose.connect(mongoURI)
 
 const app = express();
 app.set('port', (process.env.PORT || 8787));
 
-// app.use(morgan('combined'));
+app.use(morgan('combined'));
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/api', routes);
 
 const server = app.listen(app.get('port'), () => {
   console.log('Server started..: http://localhost:' + app.get('port') + '/');
 });
+
+app.use(express.static(path.join(__dirname, 'dist')));
+app.use('/api', routes);
 
 module.exports = app;
