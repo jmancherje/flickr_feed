@@ -10,19 +10,18 @@ export function checkUser() {
 }
 
 export function updateFeed() {
-  const request = new Promise(function (resolve, reject) {
+  return dispatch => {
+    dispatch(updateFeedRequest())
     jsonp('https://api.flickr.com/services/feeds/photos_public.gne?format=json', { name: 'jsonFlickrFeed' }, function(err, data) {
-      if (err) {
-        reject(err.message)
-      } else {
-        resolve(data)
-      }
+      if (err) { console.log(error) }
+      dispatch({ type: actions.FETCH_IMAGES, payload: data })
     })
-  })
+  }
+}
 
+function updateFeedRequest() {
   return {
-    type: actions.FETCH_IMAGES,
-    payload: request
+    type: actions.FETCH_IMAGES_REQUEST
   }
 }
 
@@ -64,12 +63,6 @@ function fetchFavoritesRequest() {
     type: actions.FETCH_FAVORITES_REQUEST
   }
 }
-
-// function fetchFavoritesSuccess() {
-//   return {
-//     type: actions.FETCH_FAVORITES_SUCCESS
-//   }
-// }
 
 export function changeCurrentImage(image) {
   return {

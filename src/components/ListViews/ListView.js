@@ -24,14 +24,10 @@ class ListView extends Component {
 
   renderImages() {
     const page = this.props.pageNumber - 1
-    if (this.props.images.length === 0 && this.props.location.pathname === '/favorites') {
-      if (this.props.fetching) {
-        return <img src="./assets/flickr.gif" alt="flickr spinner" />
-      } else {
-        return (
-          <h4>You have no favorites yet! Go back to the <Link to="/feed">Feed</Link> and select some favorites!</h4>
-        )
-      }
+    if (this.props.fetching && this.props.images.length === 0) {
+      return <img src="./assets/flickr.gif" alt="flickr spinner" />
+    } else if (this.props.images.length === 0 && this.props.location.pathname === '/favorites') {
+      return <h4>You have no favorites yet! Go back to the <Link to="/feed">Feed</Link> and select some favorites!</h4>
     }
     return !this.props.images[page] ? null :
       this.props.images[page].map((item, index) => 
@@ -64,7 +60,8 @@ function mapStateToPropsFeed(state) {
   console.log('state in feed', state)
   return {
     images: state.images.images,
-    pageNumber: state.ui.feedPage
+    pageNumber: state.ui.feedPage,
+    fetching: state.images.fetching
   }
 }
 
