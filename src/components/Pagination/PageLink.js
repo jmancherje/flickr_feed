@@ -4,6 +4,8 @@ export const pageLinks = (
   handlePageChange,
   numberOfPages,
   feedPage,
+  favoritesPage,
+  view,
   linkClassName
 ) => {
   const pages = []
@@ -13,15 +15,21 @@ export const pageLinks = (
     return null
   }
   let start = 1, 
-      end = pageLimit
+      end = pageLimit,
+      currentPage
 
+  if (view === 'feed') {
+    currentPage = feedPage
+  } else {
+    currentPage = favoritesPage
+  }
   if (pageLimit > 6) {
-    if (feedPage > 3 && feedPage < pageLimit - 3) {
-      start = feedPage - 3
-      end = feedPage + 3
-    } else if (feedPage <= 3) {
+    if (currentPage > 3 && currentPage < pageLimit - 3) {
+      start = currentPage - 3
+      end = currentPage + 3
+    } else if (currentPage <= 3) {
       end = 7
-    } else if (feedPage >= pageLimit - 3) {
+    } else if (currentPage >= pageLimit - 3) {
       start = pageLimit - 6
     }
   }

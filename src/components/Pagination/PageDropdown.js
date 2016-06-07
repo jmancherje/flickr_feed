@@ -8,14 +8,10 @@ function options() {
   return options
 }
 
-// export default () => <select>{options()}</select>
-
 export default function ({
   currentPageSize,
   changePageSize
 }) {
-  console.log('currentPageSize', currentPageSize)
-  console.log('changePageSize', changePageSize)
   return (
     <select onChange={(e) => {changePageSize(e.target.value)}} defaultValue={currentPageSize}>
       {(() => {
