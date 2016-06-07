@@ -9,5 +9,5 @@ export function determinePortrait(image) {
   const height = +description.substring(startHeight, endHeight)
 
   const aspectRatio = width / height
-  return aspectRatio < 1.333333333
+  return aspectRatio < 1
 }
