@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/index.js",
     "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "postinstall": "bower install; cd server; npm install; cd ..",
+    "postinstall": "./node_modules/bower/bin/bower install; cd server; npm install; cd ..",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helpers.js 'test/**/*.@(js|jsx)'",
     "test:watch": "npm run test -- --watch --watch-extensions -jsx"
   },
@@ -41,6 +41,7 @@
     "connect-history-api-fallback": "^1.2.0",
     "immutable": "^3.8.1",
     "jsonp": "^0.2.0",
+    "query-string": "^4.2.1",
     "react": "^15.1.0",
     "react-addons-css-transition-group": "^15.1.0",
     "react-dom": "^15.1.0",
