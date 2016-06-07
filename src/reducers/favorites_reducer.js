@@ -1,4 +1,5 @@
 import { splitIntoPages } from './helpers'
+import { FETCH_FAVORITES } from '../actions/types'
 
 const INITIAL_STATE = {
   images: [],
@@ -7,7 +8,7 @@ const INITIAL_STATE = {
 
 export default function(state = INITIAL_STATE, action) {
   switch(action.type) {
-    case 'FETCH_FAVORITES':
+    case FETCH_FAVORITES:
       // To keep state === [] if no favorites. 
       // Essential to show 'no favorites' message
       if (!action.payload.data.length) {

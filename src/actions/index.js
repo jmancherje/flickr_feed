@@ -53,7 +53,7 @@ export function fetchFavorites() {
   })
 
   return {
-    type: 'FETCH_FAVORITES',
+    type: actions.FETCH_FAVORITES,
     payload: request
   }
 }

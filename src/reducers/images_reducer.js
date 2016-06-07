@@ -8,7 +8,6 @@ const INITIAL_STATE = {
 
 export default function(state = INITIAL_STATE, action) {
   let images;
-  console.log(FETCH_IMAGES)
   switch(action.type) {
     case FETCH_IMAGES:
       images = action.payload.items
