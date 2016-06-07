@@ -1,4 +1,5 @@
 import { splitIntoPages, unsplitPages, toggleFavoriteImage } from './helpers'
+import { FETCH_IMAGES, TOGGLE_FEED_FAVORITE } from '../actions/types'
 
 const INITIAL_STATE = {
   images: [],
@@ -7,8 +8,9 @@ const INITIAL_STATE = {
 
 export default function(state = INITIAL_STATE, action) {
   let images;
+  console.log(FETCH_IMAGES)
   switch(action.type) {
-    case 'FETCH_IMAGES':
+    case FETCH_IMAGES:
       images = action.payload.items
       const messyImages = state.images.concat([images])
       const allImages = unsplitPages(messyImages)
@@ -16,12 +18,12 @@ export default function(state = INITIAL_STATE, action) {
       return Object.assign({}, state, {
         images: allPages
       })
-    case 'TOGGLE_FEED_FAVORITE':
+    case TOGGLE_FEED_FAVORITE:
       images = toggleFavoriteImage(action.image.link, state.images)
       return Object.assign({}, state, { images })
-    case 'CHANGE_IMAGES_PAGE_SIZE':
+    case 'CHANGE_IMAGES_PAGE_SIZE': // TODO: change page size
       return Object.assign({}, state, { pageSize: action.pageSize })
-    case 'SPLIT_IMAGES_PAGES':
+    case 'SPLIT_IMAGES_PAGES': // TODO: split image pages
       return Object.assign({}, state, { 
         images: splitIntoPages(state.images, state.pageSize) 
       })

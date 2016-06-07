@@ -1,6 +1,7 @@
 import axios from 'axios'
 import jsonp from 'jsonp'
 import { browserHistory } from 'react-router'
+import * as actions from './types'
 
 const ROOT_URL = 'http://localhost:8787'
 
@@ -20,7 +21,7 @@ export function updateFeed() {
   })
 
   return {
-    type: 'FETCH_IMAGES',
+    type: actions.FETCH_IMAGES,
     payload: request
   }
 }
@@ -72,7 +73,7 @@ export function addFavorite(image) {
 
 export function favoriteStatus(image) {
   return dispatch => {
-    dispatch({ type: 'TOGGLE_FEED_FAVORITE', image })
+    dispatch({ type: actions.TOGGLE_FEED_FAVORITE, image })
     dispatch(favoriteCurrentImage())
   }
 }
@@ -101,7 +102,7 @@ export function signinUser({
   return function (dispatch) {
     axios.post(`${ROOT_URL}/api/signin`, { email, password })
       .then(response => {
-        dispatch({ type: 'AUTH_USER' })
+        dispatch({ type: actions.AUTH_USER })
         localStorage.setItem('token', response.data.token)
         // returning user sent to favorites
         browserHistory.push('/favorites')
@@ -114,21 +115,21 @@ export function signinUser({
 
 export function authError(errorMessage) {
   return {
-    type: 'AUTH_ERROR',
+    type: actions.AUTH_ERROR,
     errorMessage
   }
 }
 
 export function signoutUser() {
   localStorage.removeItem('token')
-  return { type: 'UNAUTH_USER' }
+  return { type: actions.UNAUTH_USER }
 }
 
 export function signupUser({ email, password }) {
   return dispatch => {
     axios.post(`${ROOT_URL}/api/signup`, { email, password })
       .then(response => {
-        dispatch({ type: 'AUTH_USER' })
+        dispatch({ type: actions.AUTH_USER })
         localStorage.setItem('token', response.data.token)
         // new user will have no favorites, so push to /feed instead
         browserHistory.push('/feed')
