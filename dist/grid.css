@@ -2,22 +2,49 @@
   overflow: hidden;
 }
 .box {
+  float: left;
+  position: relative;
   width: 20%;
   padding-bottom: 20%;
   color: #FFF;
-  position: relative;
-  float: left;
 }
-.innerContent {
+.boxInner {
   position: absolute;
-  left: 1px;
-  right: 1px;
-  top: 1px;
-  bottom: 1px;
-  background: #66F;
+  left: 7px;
+  right: 7px;
+  top: 7px;
+  bottom: 7px;
+  /*background: #66F;*/
   overflow: hidden;
   cursor: pointer;
 }
+.boxInner:hover {
+  opacity: 0.75;
+  margin-bottom: 0;
+}
+
+.boxInner:hover .titleBox {
+   margin-bottom: 0;
+/*   font-size: 2rem;*/
+}
+
+.boxInner .titleBox {
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   margin-bottom: -50px;
+   background: #000;
+   background: rgba(0, 0, 0, 0.5);
+   color: #FFF;
+   padding: 10px;
+   text-align: center;
+   -webkit-transition: all 0.3s ease-out;
+   -moz-transition: all 0.3s ease-out;
+   -o-transition: all 0.3s ease-out;
+   transition: all 0.3s ease-out;
+}
+
 @media only screen and (max-width : 480px) {
   /* Smartphone view: 1 tile */
   .box {
