@@ -6,6 +6,7 @@
 - **Responsive** - Combination of custom media queries and bootstrap 4 classes for fully responsive design accross the app.
 - **UX** - Utilize redux thunk, redux store, and local state to render spinners during async operations.
 - **Testing Suite** - Unit testing suite testing reducers and logic.
+- **Hot Loader** - Great dev experience by utilizing Hot Loader in development webpack server config.
 
 ## How to Run Locally
 1. `npm install` (installs dependencies for client and server separately)
