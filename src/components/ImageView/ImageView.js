@@ -3,13 +3,23 @@ import { connect } from 'react-redux'
 import { renderTags } from './helpers'
 import { determinePortrait } from '../ListViews/helpers'
 import { addFavorite, removeFavorite, favoriteStatus, changeCurrentImage } from '../../actions'
+import _ from 'lodash'
 
 class ImageView extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      showSpinner: false
+    }
+  }
+
   componentWillMount() {
     const image = this.props.image
     if (!image) {
       this.context.router.push('/feed')
     }
+    this.favorite = _.once(this.favorite)
+    this.deleteFavorite = _.once(this.deleteFavorite)
   }
 
   formatDate(date) {
@@ -18,15 +28,19 @@ class ImageView extends Component {
   }
 
   deleteFavorite(id) {
+    this.setState({ showSpinner: true })
     removeFavorite(id)
       .then(() => {
+        this.setState({ showSpinner: false })
         this.context.router.push('/favorites')
       })
   }
 
   favorite(image) {
+    this.setState({ showSpinner: true })
     addFavorite(image)
       .then(() => {
+        this.setState({ showSpinner: false })
         this.props.favoriteStatus(image)
       })
   }
@@ -67,6 +81,7 @@ class ImageView extends Component {
           <p>published: {this.formatDate(image.published)}</p>
           <p>by: {image.author}</p>
           {this.showButton(image)}
+          {this.state.showSpinner ? <img height="45px" src="./assets/heart.gif" /> : null}
           <div>
             Tags: &nbsp;
             {renderTags(image.tags)}
@@ -83,7 +98,6 @@ ImageView.contextTypes = {
 }
 
 function mapStateToProps(state) {
-  console.log('allstate', state)
   return {
     image: state.currentImage,
     auth: state.auth.authenticated
