@@ -2,8 +2,10 @@
 - **Flickr API Images** - 20 Images from Flickr updated every minute or by clicking a button.
 - **Pagination** - Custom built pagination dynamic pagination that links to Redux state for displaying number of pages and items per page.
 - **Authentication** - Certain routes and functionality protected using JWT and custom higher order Redux components.
+- **User Content** - 'Favorite' images to save them in mongoDb database referenced by user profile.
 - **Responsive** - Combination of custom media queries and bootstrap 4 classes for fully responsive design accross the app.
-- **Unit Tests** - Unit testing suite testing reducers and logic
+- **UX** - Utilize redux thunk, redux store, and local state to render spinners during async operations.
+- **Testing Suite** - Unit testing suite testing reducers and logic.
 
 ## How to Run Locally
 1. `npm install` (installs dependencies for client and server separately)
