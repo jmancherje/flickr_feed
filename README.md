@@ -3,7 +3,7 @@
 - **Pagination** - Custom built pagination dynamic pagination that links to Redux state for displaying number of pages and items per page.
 - **Authentication** - Certain routes and functionality protected using JWT and custom higher order Redux components.
 - **Responsive** - Combination of custom media queries and bootstrap 4 classes for fully responsive design accross the app.
-- **Unit Tests** - Unit testing suite testing all 
+- **Unit Tests** - Unit testing suite testing reducers and logic
 
 ## Tech Stack
 **Client**
