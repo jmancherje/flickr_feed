@@ -5,6 +5,19 @@
 - **Responsive** - Combination of custom media queries and bootstrap 4 classes for fully responsive design accross the app.
 - **Unit Tests** - Unit testing suite testing reducers and logic
 
+## How to Run Locally
+1. `npm install` (installs dependencies for client and server separately)
+2. `npm start` (to start up the API on http://localhost:8787/)
+3. `npm run dev` (to run webpack server)
+3. Navigate to `http://localhost:8080` in your browser :+1:
+
+## How to run Tests
+**Run tests once with:**
+- `npm run test`
+
+**Keep tests running with:**
+- `npm run test:watch`
+
 ## Tech Stack
 **Client**
 - React
@@ -18,16 +31,3 @@
 
 ## Deployed Link
 http://flickrfeed.herokuapp.com/
-
-## How to Run Locally
-1. `npm install` (installs dependencies for client and server separately)
-2. `npm start` (to start up the API on http://localhost:8787/)
-3. `npm run dev` (to run webpack server)
-3. Navigate to `http://localhost:8080` in your browser :+1:
-
-## Tests
-**Run tests once with:**
-- `npm run test`
-
-**Keep tests running with:**
-- `npm run test:watch`
