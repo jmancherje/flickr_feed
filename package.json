@@ -4,6 +4,7 @@
   "description": "Flickr feed app",
   "main": "index.js",
   "scripts": {
+    "build": "webpack --config ./webpack.prod.config.js --progress --colors",
     "start": "node server/index.js",
     "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "postinstall": "./node_modules/bower/bin/bower install; cd server; npm install; cd ..",
