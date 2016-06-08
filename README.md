@@ -19,7 +19,7 @@
 ## Deployed Link
 http://flickrfeed.herokuapp.com/
 
-# How to Run Locally
+## How to Run Locally
 1. `npm install` (installs dependencies for client and server separately)
 2. `npm start` (to start up the API on http://localhost:8787/)
 3. `npm run dev` (to run webpack server)
