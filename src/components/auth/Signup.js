@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
-import { signupUser } from '../../actions'
+import { signupUser, authError } from '../../actions'
 import { Link } from 'react-router'
 
 class Signup extends Component {
@@ -40,7 +40,7 @@ class Signup extends Component {
         </fieldset>
         {this.renderAlert()}
         <button action="submit" className="btn btn-primary">Sign up!</button>
-        <p style={{ marginTop: '15px' }}>Already Registered? <Link to="/login">Log in here</Link></p>
+        <p style={{ marginTop: '15px' }}>Already Registered? <Link to="/login" onClick={() => this.props.authError('')}>Log in here</Link></p>
       </form>
     )
   }
@@ -76,4 +76,4 @@ export default reduxForm({
   form: 'signup',
   fields: ['email', 'password', 'passwordConfirm'],
   validate
-}, mapStateToProps, { signupUser })(Signup)
+}, mapStateToProps, { signupUser, authError })(Signup)

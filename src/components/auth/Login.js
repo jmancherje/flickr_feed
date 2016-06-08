@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
-import { signinUser } from '../../actions'
+import { signinUser, authError } from '../../actions'
 import { Link } from 'react-router'
 
 class Signin extends Component {
@@ -19,6 +19,8 @@ class Signin extends Component {
     }
   }
 
+
+
   render() {
     const { handleSubmit, fields: { email, password }} = this.props
 
@@ -35,7 +37,7 @@ class Signin extends Component {
         </fieldset>
         {this.renderAlert()}
         <button action="submit" className="btn btn-primary">Sign in</button>
-        <p style={{ marginTop: '15px' }}>Not Registered? <Link to="/signup">Sign up here</Link></p>
+        <p style={{ marginTop: '15px' }}>Not Registered? <Link to="/signup" onClick={() => this.props.authError('')}>Sign up here</Link></p>
       </form>
     )
   }
@@ -50,4 +52,4 @@ function mapStateToProps(state) {
 export default reduxForm({
   form: 'signin',
   fields: ['email', 'password']
-}, mapStateToProps, { signinUser })(Signin)
+}, mapStateToProps, { signinUser, authError })(Signin)
